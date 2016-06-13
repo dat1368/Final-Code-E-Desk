@@ -20,37 +20,7 @@ RTOS TASK
                               WORDS.*/
 /*define struct of weather forecast*/
     
-typedef struct struct_MyDateTime
-{
-	int day;
-	int month;
-	int year;
 
-	int hour;
-	int minute;
-
-}MyDateTime;
-
-typedef struct 
-{
-    uint8_t Temp; 
-    uint8_t Humi; 
-    long Pres;   
-    uint8_t Rain;    
-} WeatherRoot;
-
-typedef struct
-{
-    MyDateTime currentDateTime;
-    WeatherRoot currentWeather[5];
-    float presDown;
-    float rateInYear;
-    float rateInDay;
-    float output;
-    double totalDecrease;
-    char* strWeather;
-    float ratio;
-}WeatherForecast;
 
 //Weather WeatherArray[24];
 float PresDownArray[24];
@@ -61,7 +31,7 @@ WeatherForecast WthFor;
 
 uint32_t multiplier;
 uint8_t pipeflag[6]= {0,0,0,0,0,0};
-uint8_t dataOut[32], dataIn0[32],dataIn1[32],dataIn2[32];
+
 
 xTaskHandle ptr_readRf;
 xTaskHandle ptr_Fuzzy;
@@ -69,19 +39,14 @@ xTaskHandle ptr_SendThgSpk;
 xTaskHandle ptr_showLCD;
 xTaskHandle ptr_readRTC;
 
-//static int vDA2_readRf(void *pvParameters); /*Nhận dữ liệu từ RF*/
+static void vDA2_readRf(void *pvParameters); /*Nhận dữ liệu từ RF*/
 static void vDA2_Fuzzy(void *pvParameters);
 //void vDA2_showLCD(void *pvParameters);
-static void vDA2_readRTC(void *pvParameters);
+//static void vDA2_readRTC(void *pvParameters);
 //static int vDA2_sendThgSpk(void *pvParameters);
 //static int vDA2_readRTC(void *pvParameters);
 
-/*declarece*/
-int initMain(int flag);
-int initTask(void);
-int showDefaultLCD(void);
-int ResetWeather(WeatherForecast weatherForecast);
-float pushPresDownArray(float pushValue);
+
 int main() 
 {
     initMain(1);
@@ -140,7 +105,7 @@ int main()
 //  return 1;
 //}
 
-int resetWeather(WeatherForecast weatherForecast)
+int ResetWeather(WeatherForecast weatherForecast)
 {
     int arrayTemp=0;
     weatherForecast.currentDateTime.hour = 0;
@@ -168,10 +133,11 @@ int resetWeather(WeatherForecast weatherForecast)
     
 static void vDA2_readRf(void *pvParameters) 
 {
-  while(1)
-  {
-    if (TM_NRF24L01_DataReady())
-      {
+    int i =0;
+    while(1)
+    {
+        if (TM_NRF24L01_DataReady())
+        {
                     /*
           *If node 1
           *     receiver WthFor.currentWeather[1];
@@ -217,7 +183,7 @@ static void vDA2_readRf(void *pvParameters)
                 WthFor.currentWeather[0].Pres = NRF.ApSuat;
                 WthFor.currentWeather[0].Rain = NRF.Mua;
           }
-          for(int i = 0 ; i < 4 ; i++)
+          for(i = 0 ; i < 4 ; i++)
           {
             WthFor.currentWeather[4].Temp = WthFor.currentWeather[0].Temp;
             WthFor.currentWeather[4].Humi = WthFor.currentWeather[1].Temp;
@@ -230,59 +196,60 @@ static void vDA2_readRf(void *pvParameters)
   }
 }
 /*Function*/
-//static void vDA2_readRTC(void *pvParameters)
-//{
-//    while(1)
-//    {
-//    TM_DS1307_GetDateTime(&time);
-//    LCD_Clear_P(BLACK, 62, 0, 4000);
-//    LCD_CharSize(24);
-//    sprintf(sbuff, "%02d:%02d:%02d", time.hours, time.minutes, time.seconds);
-//    LCD_StringLine(62, 235, (uint8_t *)sbuff);
-//    if (time.hours == 0 && time.minutes == 00 && time.seconds == 0)
-//        {
-//            LCD_Clear_P(BLACK, 86, 0, 4000);
-//            LCD_CharSize(16);
-//            sprintf(sbuff, "%s,%d,%s,%d", date[time.day], time.date, Month[time.month],time.year + 2000);
-//            LCD_StringLine(86, 306, (uint8_t *)sbuff);
-//        }
-//    }
-//}
+static void vDA2_readRTC(void *pvParameters)
+{
+    while(1)
+    {
+    TM_DS1307_GetDateTime(&time);
+    LCD_Clear_P(BLACK, 62, 0, 4000);
+    LCD_CharSize(24);
+    sprintf(sbuff, "%02d:%02d:%02d", time.hours, time.minutes, time.seconds);
+    LCD_StringLine(62, 235, (uint8_t *)sbuff);
+    if (time.hours == 0 && time.minutes == 00 && time.seconds == 0)
+        {
+            LCD_Clear_P(BLACK, 86, 0, 4000);
+            LCD_CharSize(16);
+            sprintf(sbuff, "%s,%d,%s,%d", date[time.day], time.date, Month[time.month],time.year + 2000);
+            LCD_StringLine(86, 306, (uint8_t *)sbuff);
+        }
+    }
+}
 
-//int vDA2_showLCD(void *pvParameters)
-//{
-//    showTime();
-//}
+int vDA2_showLCD(void *pvParameters)
+{
+    //showTime();
+    return 1;
+}
 /*Function*/
-//int resetLcd()
-//{
+int resetLcd()
+{
 
-//  TM_DS1307_GetDateTime(&time);
-//  LCD_CharSize(16);
-//  LCD_SetTextColor(RED);
-//  sprintf(sbuff, "%s,%02d,%s,%04d", date[time.day], time.date,Month[time.month], time.year + 2000);
-//  LCD_StringLine(86, 230, (uint8_t *)sbuff);
-//  TM_DS1307_GetDateTime(&time);
-//  LCD_CharSize(16);
-//  sprintf(sbuff, "Temperature:%02d", NRF.NhietDo);
-//  LCD_StringLine(134, 306, (uint8_t *)sbuff);
-//  sprintf(sbuff, "Humidity:%02d", NRF.DoAm);
-//  LCD_StringLine(134, 120, (uint8_t *)sbuff);
-//  sprintf(sbuff, "Pressure: %ld", NRF.ApSuat);
-//  LCD_StringLine(168, 306, (uint8_t *)sbuff);
-//  sprintf(sbuff, "Current:%s", Mua[NRF.Mua]);
-//  LCD_StringLine(168, 120, (uint8_t *)sbuff);
-//  sprintf(sbuff, "Total Decrease:%g", WthFor.totalDecrease);
-//  LCD_StringLine(200, 306, (uint8_t *)sbuff);
-//  LCD_CharSize(24);
-//  LCD_SetTextColor(GREEN);
-//  sprintf(sbuff, "%02d:%02d:%02d", time.hours, time.minutes, time.seconds);
-//  LCD_StringLine(62, 235, (uint8_t *)sbuff);
-//  LCD_CharSize(16);
-//  sprintf(sbuff, "Forecast:%s After %d hours(%2g%%)", "Rain", 2, WthFor.output * 100);
-//  LCD_StringLine(110, 300, (uint8_t *)sbuff);
-//  return 1;
-//}
+  TM_DS1307_GetDateTime(&time);
+  LCD_CharSize(16);
+  LCD_SetTextColor(RED);
+  sprintf(sbuff, "%s,%02d,%s,%04d", date[time.day], time.date,Month[time.month], time.year + 2000);
+  LCD_StringLine(86, 230, (uint8_t *)sbuff);
+  TM_DS1307_GetDateTime(&time);
+  LCD_CharSize(16);
+  sprintf(sbuff, "Temperature:%02d", NRF.NhietDo);
+  LCD_StringLine(134, 306, (uint8_t *)sbuff);
+  sprintf(sbuff, "Humidity:%02d", NRF.DoAm);
+  LCD_StringLine(134, 120, (uint8_t *)sbuff);
+  sprintf(sbuff, "Pressure: %ld", NRF.ApSuat);
+  LCD_StringLine(168, 306, (uint8_t *)sbuff);
+  sprintf(sbuff, "Current:%s", Mua[NRF.Mua]);
+  LCD_StringLine(168, 120, (uint8_t *)sbuff);
+  sprintf(sbuff, "Total Decrease:%g", WthFor.totalDecrease);
+  LCD_StringLine(200, 306, (uint8_t *)sbuff);
+  LCD_CharSize(24);
+  LCD_SetTextColor(GREEN);
+  sprintf(sbuff, "%02d:%02d:%02d", time.hours, time.minutes, time.seconds);
+  LCD_StringLine(62, 235, (uint8_t *)sbuff);
+  LCD_CharSize(16);
+  sprintf(sbuff, "Forecast:%s After %d hours(%2g%%)", "Rain", 2, WthFor.output * 100);
+  LCD_StringLine(110, 300, (uint8_t *)sbuff);
+  return 1;
+}
 /*Function*/
 void vDA2_Fuzzy(void *pvParameters)
 {
@@ -333,21 +300,23 @@ int initTask()
     xTaskCreate(vDA2_Fuzzy,(const signed char*)"Fuzzy",STACK_SIZE_MIN,NULL,tskIDLE_PRIORITY,&ptr_Fuzzy);
     // xTaskCreate(vDA2_showLCD, (const signed char *)"showLCD", STACK_SIZE_MIN,ptr_showLCD, tskIDLE_PRIORITY, NULL);
     // xTaskCreate(vDA2_SendThgSpk,(const signed char*)"sendThgSpk",STACK_SIZE_MIN, ptr_SendThgSpk,2, NULL );
-    xTaskCreate(vDA2_readRTC,(const signed char*)"readRTC",STACK_SIZE_MIN,NULL,tskIDLE_PRIORITY,&ptr_readRTC);
+    //xTaskCreate(vDA2_readRTC,(const signed char*)"readRTC",STACK_SIZE_MIN,NULL,tskIDLE_PRIORITY,&ptr_readRTC);
     return 1;
 }
 
 float pushPresDownArray(float pushValue)
 {
 	/*push to PresDownArray pushvalue and return total presdown*/
-	int array_size = sizeof(PresDownArray) / sizeof(PresDownArray[0]);
-	float totalPresDown = 0;
-	for (int j = array_size - 1; j > 0; j--)
+	int j =0,i =0;
+    float totalPresDown = 0;
+    int array_size = sizeof(PresDownArray) / sizeof(PresDownArray[0]);
+	
+	for (j = array_size - 1; j > 0; j--)
 	{
 		PresDownArray[j] = PresDownArray[j - 1];
 	}
 	PresDownArray[0] = pushValue;
-	for (int i = 0; i < 24; i++)
+	for (i = 0; i < 24; i++)
 	{
 		totalPresDown += PresDownArray[i];
 	}

@@ -69,6 +69,37 @@ char* Month[] = {"",        "January",  "February", "March",  "April",
                  "May",     "June",     "July",     "August", "September",
                  "October", "November", "December"};
 char* Mua[] = {"Heavy", "Rain", "Sunny"};
+typedef struct struct_MyDateTime
+{
+	int day;
+	int month;
+	int year;
+
+	int hour;
+	int minute;
+
+}MyDateTime;
+
+typedef struct 
+{
+    uint8_t Temp; 
+    uint8_t Humi; 
+    long Pres;   
+    uint8_t Rain;    
+} WeatherRoot;
+
+typedef struct
+{
+    MyDateTime currentDateTime;
+    WeatherRoot currentWeather[5];
+    float presDown;
+    float rateInYear;
+    float rateInDay;
+    float output;
+    double totalDecrease;
+    char* strWeather;
+    float ratio;
+}WeatherForecast;
 
 int timeDelay_lwf = 0;
 FUZ_SYS_LWF fuzzy_system_lwf;
@@ -76,6 +107,12 @@ int readRf(void);
 int showTime(void);
 int resetLcd(void);
 int sendThSp(void);
+/*declarece*/
+int initMain(int flag);
+int initTask(void);
+int showDefaultLCD(void);
+int ResetWeather(WeatherForecast weatherForecast);
+float pushPresDownArray(float pushValue);
 
 #endif /* __MAIN_H */
 

@@ -69,11 +69,9 @@ void RF_receive(NRF_ThoiTiet* NRF)
 	
 }
 
-void readRfData(WeatherForecast* NRF)
+void readRfData(NRF_ThoiTiet* NRF)
 {
 			TM_NRF24L01_GetData(dataIn);
-            pipe_check = TM_NRF24L01_CHECK_PIPE();
-    
 			NRF->ApSuat = dataIn[0]<<24|dataIn[1]<<16|dataIn[2]<<8|(dataIn[3]);
 			NRF->NhietDo = dataIn[4];
 			NRF->DoAm = dataIn[5];

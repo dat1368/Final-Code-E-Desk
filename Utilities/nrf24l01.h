@@ -19,6 +19,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 typedef struct 
 {
     uint8_t NhietDo; 
