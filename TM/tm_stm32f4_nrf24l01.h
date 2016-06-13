@@ -327,6 +327,7 @@ void TM_NRF24L01_SetRF(TM_NRF24L01_DataRate_t DataRate, TM_NRF24L01_OutputPower_
  * @param  None
  * @retval Status register from NRF
  */
+uint8_t TM_NRF24L01_CHECK_PIPE(void);
 uint8_t TM_NRF24L01_GetStatus(void);
 
 /* Private */
