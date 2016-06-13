@@ -45,15 +45,15 @@ void setRF(){
 	TM_NRF24L01_SetRF(TM_NRF24L01_DataRate_2M, TM_NRF24L01_OutputPower_0dBm);
 	
 	/*buoofn my address, 5 bytes */
-	//TM_NRF24L01_SetMyAddress(MyAddress);
-    TM_NRF24L01_SetMyAddress_Multiciver(
-    MyAddress_RX_ADDR_P0,
-    MyAddress_RX_ADDR_P1,
-    MyAddress_RX_ADDR_P2,
-    MyAddress_RX_ADDR_P3,
-    MyAddress_RX_ADDR_P4,
-    MyAddress_RX_ADDR_P5
-    );
+	TM_NRF24L01_SetMyAddress(MyAddress);
+//    TM_NRF24L01_SetMyAddress_Multiciver(
+//    MyAddress_RX_ADDR_P0,
+//    MyAddress_RX_ADDR_P1,
+//    MyAddress_RX_ADDR_P2,
+//    MyAddress_RX_ADDR_P3,
+//    MyAddress_RX_ADDR_P4,
+//    MyAddress_RX_ADDR_P5
+//    );
 	
 	/* Set TX address, 5 bytes */
 	TM_NRF24L01_SetTxAddress(TxAddress);
