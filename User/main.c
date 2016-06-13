@@ -51,68 +51,6 @@ int main()
 {
     int i =0;
     initMain(1);
-    while(1)
-    {
-        TM_DISCO_LedOn(LED_ORANGE);
-        if (TM_NRF24L01_DataReady())
-        {
-          TM_DISCO_LedOn(LED_GREEN);
-          /*
-          *If node 1
-          *     receiver WthFor.currentWeather[1];
-                
-          If node 2
-          *     receiver WthFor.currentWeather[2];
-          If node 3
-          *     receiver WthFor.currentWeather[3];
-          If node 4
-          *     receiver WthFor.currentWeather[4];
-          */
-          //pipe_check = TM_NRF24L01_CHECK_PIPE();
-          RF_receive(&NRF);
-//          switch(pipe_check)
-//          {
-//          case 0:
-//                WthFor.currentWeather[0].Temp = NRF.NhietDo;
-//                WthFor.currentWeather[0].Humi = NRF.DoAm;
-//                WthFor.currentWeather[0].Pres = NRF.ApSuat;
-//                WthFor.currentWeather[0].Rain = NRF.Mua;
-//              break;
-//          case 1:
-//                WthFor.currentWeather[1].Temp = NRF.NhietDo;
-//                WthFor.currentWeather[1].Humi = NRF.DoAm;
-//                WthFor.currentWeather[1].Pres = NRF.ApSuat;
-//                WthFor.currentWeather[1].Rain = NRF.Mua;
-//              break;
-//          case 2:
-//                WthFor.currentWeather[2].Temp = NRF.NhietDo;
-//                WthFor.currentWeather[2].Humi = NRF.DoAm;
-//                WthFor.currentWeather[2].Pres = NRF.ApSuat;
-//                WthFor.currentWeather[2].Rain = NRF.Mua;
-//              break;
-//          case 3:
-//                WthFor.currentWeather[3].Temp = NRF.NhietDo;
-//                WthFor.currentWeather[3].Humi = NRF.DoAm;
-//                WthFor.currentWeather[3].Pres = NRF.ApSuat;
-//                WthFor.currentWeather[3].Rain = NRF.Mua;
-//              break;
-//          default:
-                WthFor.currentWeather[4].Temp = NRF.NhietDo;
-                WthFor.currentWeather[4].Humi = NRF.DoAm;
-                WthFor.currentWeather[4].Pres = NRF.ApSuat;
-                WthFor.currentWeather[4].Rain = NRF.Mua;
-//          }
-//          for(i = 0 ; i < 4 ; i++)
-//          {
-//            WthFor.currentWeather[4].Temp = WthFor.currentWeather[0].Temp;
-//            WthFor.currentWeather[4].Humi = WthFor.currentWeather[0].Humi;
-//            WthFor.currentWeather[4].Pres = WthFor.currentWeather[0].Pres;
-//            WthFor.currentWeather[4].Rain = WthFor.currentWeather[0].Rain;
-//          }
-          
-        }
-    }
-    
     if(initTask())
     {
     vTaskStartScheduler();
@@ -211,18 +149,20 @@ int ResetWeather(WeatherForecast weatherForecast)
 static void vDA2_readRf(void *pvParameters) 
 {
     int i =0;
+
     while(1)
     {
-        vTaskDelay( 500 / portTICK_RATE_MS );
+        vTaskDelay( 50 / portTICK_RATE_MS );
         TM_DISCO_LedToggle(LED_ORANGE);
         if (TM_NRF24L01_DataReady())
         {
-          TM_DISCO_LedOn(LED_GREEN);
-          RF_receive(&NRF);
-                WthFor.currentWeather[4].Temp = NRF.NhietDo;
-                WthFor.currentWeather[4].Humi = NRF.DoAm;
-                WthFor.currentWeather[4].Pres = NRF.ApSuat;
-                WthFor.currentWeather[4].Rain = NRF.Mua;
+            TM_DISCO_LedOn(LED_GREEN);
+            RF_receive(&NRF);
+            WthFor.currentWeather[4].Temp = NRF.NhietDo;
+            WthFor.currentWeather[4].Humi = NRF.DoAm;
+            WthFor.currentWeather[4].Pres = NRF.ApSuat;
+            WthFor.currentWeather[4].Rain = NRF.Mua;
+            vTaskResume(ptr_Fuzzy);
 //        /*MUlti receive*/
 //        if (TM_NRF24L01_DataReady())
 //        {
@@ -282,13 +222,14 @@ static void vDA2_readRf(void *pvParameters)
 //            /*End multirecei*/
           
             }
-        }
     }
+}
 /*Function*/
 static void vDA2_readRTC(void *pvParameters)
 {
     while(1)
     {
+    vTaskDelay( 50/portTICK_RATE_MS );
     TM_DS1307_GetDateTime(&time);
     LCD_Clear_P(BLACK, 62, 0, 4000);
     LCD_CharSize(24);
@@ -344,7 +285,7 @@ void vDA2_Fuzzy(void *pvParameters)
 {
 	while(1)
 	{
-        vTaskDelay( 500 / portTICK_RATE_MS );
+        //vTaskDelay( 5000 / portTICK_RATE_MS );
         WthFor.currentDateTime.month = time.month;
         WthFor.currentDateTime.hour = time.hours;
         /*
@@ -381,17 +322,17 @@ void vDA2_Fuzzy(void *pvParameters)
         {
             WthFor.strWeather = "HEAVY_RAIN";
         }
-    //vTaskResume(ptr_readRf);
+        vTaskSuspend(ptr_Fuzzy);
     }
 }
 /*Function*/
 int initTask()
 {
     xTaskCreate(vDA2_readRf,(const signed char *)"readRf", STACK_SIZE_MIN,NULL, (unsigned)1,&ptr_readRf);
-    xTaskCreate(vDA2_Fuzzy,(const signed char*)"Fuzzy",STACK_SIZE_MIN,NULL,tskIDLE_PRIORITY,&ptr_Fuzzy);
+    //xTaskCreate(vDA2_Fuzzy,(const signed char*)"Fuzzy",STACK_SIZE_MIN,NULL,tskIDLE_PRIORITY,&ptr_Fuzzy);
     // xTaskCreate(vDA2_showLCD, (const signed char *)"showLCD", STACK_SIZE_MIN,ptr_showLCD, tskIDLE_PRIORITY, NULL);
     // xTaskCreate(vDA2_SendThgSpk,(const signed char*)"sendThgSpk",STACK_SIZE_MIN, ptr_SendThgSpk,2, NULL );
-    //xTaskCreate(vDA2_readRTC,(const signed char*)"readRTC",STACK_SIZE_MIN,NULL,tskIDLE_PRIORITY,&ptr_readRTC);
+    xTaskCreate(vDA2_readRTC,(const signed char*)"readRTC",STACK_SIZE_MIN,NULL,tskIDLE_PRIORITY,&ptr_readRTC);
     return 1;
 }
 
