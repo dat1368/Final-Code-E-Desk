@@ -1,0 +1,67 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.13.0.0
+Copyright (C) 2014 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Tien Dat Nguyen Tran, TIENDAT, LIC=D0D56-D6Q83-007N9-4SYBN-HLE2L-TZCCU
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Standard  Version: 5.13.0.0
+Toolchain Path:  C:\Program Files\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.13.0.0
+Dialog DLL:      DCM.DLL V1.13.1.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.14.0_KEIL
+Dialog DLL:      TCM.DLL V1.14.4.0
+ 
+<h2>Project:</h2>
+E:\STM32\Project\DO_AN_MON_HOC_2\TFT\MDK-ARM\MAIN_BOARD.uvprojx
+Project File Date:  06/05/2016
+
+<h2>Output:</h2>
+Build target 'STM32F407'
+compiling main.c...
+..\User\main.c(127): error:  #20: identifier "mainForecast" is undefined
+        sprintf(sbuff, "Total Decrease:%f", mainForecast.totalPe);
+..\User\main.c(139): warning:  #550-D: parameter "weatherForecast" was set but never used
+  int resetWeather(WeatherForecast weatherForecast)
+..\User\main.c(263): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          if (WthFor.output <= 0.575)
+..\User\main.c(267): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          else if(WthFor.output <=0.605)
+..\User\main.c(293): error:  #29: expected an expression
+        for (int j = array_size - 1; j > 0; j--)
+..\User\main.c(293): error:  #20: identifier "j" is undefined
+        for (int j = array_size - 1; j > 0; j--)
+..\User\main.c(298): error:  #29: expected an expression
+        for (int i = 0; i < 24; i++)
+..\User\main.c(298): error:  #20: identifier "i" is undefined
+        for (int i = 0; i < 24; i++)
+..\User\main.c(291): warning:  #177-D: variable "array_size" was declared but never referenced
+        int array_size = sizeof(PresDownArray) / sizeof(PresDownArray[0]);
+..\User\main.c: 4 warnings, 5 errors
+compiling system_stm32f4xx.c...
+compiling tm_stm32f4_nrf24l01.c...
+compiling nrf24l01.c...
+..\Utilities\nrf24l01.c(67): warning:  #223-D: function "TM_NRF24L01_CHECK_PIPE" declared implicitly
+              pipe_check = TM_NRF24L01_CHECK_PIPE();
+..\Utilities\nrf24l01.c(39): warning:  #550-D: variable "pipe_check" was set but never used
+  static uint8_t pipe_check=0xff;
+..\Utilities\nrf24l01.c: 2 warnings, 0 errors
+".\Objects\MAIN_BOARD.axf" - 5 Error(s), 6 Warning(s).
+
+<h2>Collection of Component include folders:</h2>
+  E:\STM32\Project\DO_AN_MON_HOC_2\TFT\MDK-ARM\RTE
+  C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.7.0
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+</pre>
+</body>
+</html>
