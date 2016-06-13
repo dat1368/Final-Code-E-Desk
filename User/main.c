@@ -219,10 +219,10 @@ static void vDA2_readRf(void *pvParameters)
           }
           for(int i = 0 ; i < 4 ; i++)
           {
-            WthFor.currentWeather[4].Temp = ;
-            WthFor.currentWeather[4].Humi = NRF.DoAm;
-            WthFor.currentWeather[4].Pres = NRF.ApSuat;
-            WthFor.currentWeather[4].Rain = NRF.Mua;
+            WthFor.currentWeather[4].Temp = WthFor.currentWeather[0].Temp;
+            WthFor.currentWeather[4].Humi = WthFor.currentWeather[1].Temp;
+            WthFor.currentWeather[4].Pres = WthFor.currentWeather[2].Temp;
+            WthFor.currentWeather[4].Rain = WthFor.currentWeather[3].Temp;
           }
           
           
