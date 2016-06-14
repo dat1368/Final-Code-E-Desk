@@ -266,44 +266,54 @@ NOTE:  u is input, c is mem. fun. center, and w is mem. fun. width. */
 
 /*defuzzi using Sugeno*/
 
-void findMaxMin(const IN_MEM *tem_mem, const IN_MEM *hum_mem,
-                const IN_MEM *presDown_mem, const IN_MEM *rateYear_mem,
-                const IN_MEM *rateDay_mem, OUT_MEM *out_mem) {
-  float tmp = 0;
-  int i = 0, j = 0, k = 0, m = 0, n = 0;
-  int index = 0; // chay tu 0->80
-  float outDOM[5] = {0, 0, 0, 0, 0};
-  int uFuzzy[72];
-  for (i = 0; i < 72; i++) {
-    uFuzzy[i] = LWF_Fuzzy[i];
-  }
-  //
-  for (i = 0; i < 3; i++) {
-    for (j = 0; j < 3; j++)
-      for (m = 0; m < 2; m++)
-        for (n = 0; n < 2; n++)
-          ;
-    for (k = 0; k < 2; k++) {
-      if ((tem_mem->dom[i] != (double)0.0) &&
-          (hum_mem->dom[j] != (double)0.0) &&
-          (presDown_mem->dom[m] != (double)0.0) &&
-          (rateYear_mem->dom[n] != (double)0.0) &&
-          (rateDay_mem->dom[k] != (double)0.0)) {
+void findMaxMin(
+	const IN_MEM *tem_mem,
+	const IN_MEM *hum_mem,
+	const IN_MEM *presDown_mem,
+	const IN_MEM *rateYear_mem,
+	const IN_MEM *rateDay_mem,
+	OUT_MEM *out_mem)
+{
+	float tmp = 0;
+	int i=0,j=0,k=0,m=0,n=0;
+	int index = 0;// chay tu 0->80 
+	float outDOM[5] = { 0, 0, 0, 0, 0 };
+	int uFuzzy[72];
+	for (i = 0; i < 72; i++)
+	{
+		uFuzzy[i] = LWF_Fuzzy[i];
+	}
+	//             
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < 3; j++)
+			for (m = 0; m < 2; m++)
+				for (n = 0; n < 2; n++)
+					for (k = 0; k < 2; k++)
+					{
+						if ((tem_mem->dom[i] != 0.0)
+							&& (hum_mem->dom[j] != 0.0)
+							&& (presDown_mem->dom[m] != 0.0)
+							&& (rateYear_mem->dom[n] != 0.0)
+							&& (rateDay_mem->dom[k] != 0.0))
+						{
 
-        tmp = MIN5(tem_mem->dom[i], hum_mem->dom[j], presDown_mem->dom[m],
-                   rateYear_mem->dom[n], rateDay_mem->dom[k]);
+							tmp = MIN5(tem_mem->dom[i],
+								hum_mem->dom[j],
+								presDown_mem->dom[m],
+								rateYear_mem->dom[n],
+								rateDay_mem->dom[k]);
+							
+							outDOM[uFuzzy[index]] = MAX(outDOM[uFuzzy[index]], tmp);
+							//std::cout << "DOM::::::::::" << tmp << std::endl;
+						}
+						index++;
+					}
 
-        outDOM[uFuzzy[index]] = MAX(outDOM[uFuzzy[index]], tmp);
-        // std::cout << "DOM::::::::::" << tmp << std::endl;
-      }
-      index++;
-    }
+	}// End loop for  
 
-  } // End loop for
-
-  for (i = 0; i < 5; i++) {
-    out_mem->dom[i] = outDOM[i];
-  }
+	for (i = 0; i<5; i++) {
+		out_mem->dom[i] = outDOM[i];
+	}
 }
 
 float inf_defuzz_lwf2(IN_MEM *tem_mem, IN_MEM *hum_mem, IN_MEM *presDown_mem,
@@ -320,5 +330,13 @@ float inf_defuzz_lwf2(IN_MEM *tem_mem, IN_MEM *hum_mem, IN_MEM *presDown_mem,
     Atot += out_mem->dom[i];
     out_mem->dom[i] = 0;
   }
-  return WAtot / Atot;
+  
+  if(Atot == 0)
+  {
+      return 1;
+  }
+  else
+  {
+    return WAtot / Atot;
+  }
 }

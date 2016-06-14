@@ -98,6 +98,7 @@ typedef struct
     float output;
     double totalDecrease;
     char* strWeather;
+    char* strForWeather;
     float ratio;
 }WeatherForecast;
 
@@ -113,6 +114,9 @@ int initTask(void);
 int showDefaultLCD(void);
 int ResetWeather(WeatherForecast weatherForecast);
 float pushPresDownArray(float pushValue);
+int LCD_showDateTime(void);
+int LCD_showUpdate(int mode);
+//double round(double soCanLamTron, int chuSo);
 
 #endif /* __MAIN_H */
 
