@@ -83,7 +83,7 @@ uint8_t mLCD_LcdMode = 0;
 struct Environment
 {
 	uint8_t NhietDo;
-	uint8_t AnhSang;
+	uint32_t AnhSang;
 	uint8_t DoAmKhi;
 };
 
