@@ -1,10 +1,10 @@
 .\objects\list.o: ..\FreeRTOS\Source\list.c
-.\objects\list.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\list.o: ..\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\list.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\list.o: ..\FreeRTOS\Source\include\projdefs.h
 .\objects\list.o: ..\FreeRTOS\FreeRTOSConfig.h
-.\objects\list.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\list.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\list.o: ..\Libraries\CMSIS\Include\core_cm4.h
 .\objects\list.o: ..\Libraries\CMSIS\Include\core_cmInstr.h

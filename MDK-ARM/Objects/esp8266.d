@@ -1,11 +1,11 @@
 .\objects\esp8266.o: ..\ESP8266\esp8266.c
 .\objects\esp8266.o: ..\ESP8266\esp8266.h
-.\objects\esp8266.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\esp8266.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\esp8266.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\esp8266.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\esp8266.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\objects\esp8266.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\esp8266.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\objects\esp8266.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\objects\esp8266.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
@@ -40,7 +40,7 @@
 .\objects\esp8266.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
 .\objects\esp8266.o: ..\FATFS\diskio.h
 .\objects\esp8266.o: ..\FATFS\integer.h
-.\objects\esp8266.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\esp8266.o: ..\TM\tm_stm32f4_ds1307.h
 .\objects\esp8266.o: ..\TM\tm_stm32f4_i2c.h
 .\objects\esp8266.o: ..\TM\attributes.h
@@ -55,3 +55,14 @@
 .\objects\esp8266.o: ..\TM\tm_stm32f4_delay.h
 .\objects\esp8266.o: ..\TM\tm_stm32f4_timer_properties.h
 .\objects\esp8266.o: ..\TM\tm_stm32f4_usart.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\include\FreeRTOS.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\include\projdefs.h
+.\objects\esp8266.o: ..\FreeRTOS\FreeRTOSConfig.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\include\portable.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\include\mpu_wrappers.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\include\queue.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\include\task.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\include\list.h
+.\objects\esp8266.o: ..\FreeRTOS\Source\include\croutine.h

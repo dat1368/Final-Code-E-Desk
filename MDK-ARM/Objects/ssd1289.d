@@ -2,7 +2,7 @@
 .\objects\ssd1289.o: ..\Utilities\SSD1289.h
 .\objects\ssd1289.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\ssd1289.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\objects\ssd1289.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ssd1289.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\ssd1289.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\objects\ssd1289.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\objects\ssd1289.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
@@ -36,9 +36,9 @@
 .\objects\ssd1289.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h
 .\objects\ssd1289.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
 .\objects\ssd1289.o: ..\Utilities\AsciiLib.h
-.\objects\ssd1289.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\ssd1289.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\ssd1289.o: ..\TM\tm_stm32f4_delay.h
 .\objects\ssd1289.o: ..\TM\defines.h
 .\objects\ssd1289.o: ..\TM\attributes.h
 .\objects\ssd1289.o: ..\TM\tm_stm32f4_timer_properties.h
-.\objects\ssd1289.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\ssd1289.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

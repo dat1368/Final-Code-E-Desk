@@ -100,8 +100,8 @@ SCL		PB6			I2C1, PinsPack 1
  
 /* I2C settings for I2C library */
 #ifndef DS1307_I2C
-#define DS1307_I2C					I2C1
-#define DS1307_I2C_PINSPACK			TM_I2C_PinsPack_2
+#define DS1307_I2C					I2C2
+#define DS1307_I2C_PINSPACK			TM_I2C_PinsPack_1
 #endif
 
 /* DS1307 I2C clock */

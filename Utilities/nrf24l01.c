@@ -8,8 +8,12 @@
 **/
 
 #include "nrf24l01.h"
+#include "tm_stm32f4_disco.h"
 uint8_t dataOut[32], dataIn[32];
 extern uint8_t a[32];
+//uint8_t count24=0;
+//int count_Fuzzy;
+//uint8_t mLCD_LcdMode = 0;
 uint8_t TxAddress[] = {
 	0xE7,
 	0xE7,
@@ -37,7 +41,7 @@ uint8_t MyAddress_RX_ADDR_P5[1] = {0xC6};
 
 
 TM_NRF24L01_Transmit_Status_t transmissionStatus;
-void setRF(){
+void mRF_initRf(){
 /* NRF24L01 goes to RX mode by default */
 	TM_NRF24L01_Init(100, 32);
 	
@@ -59,14 +63,23 @@ void setRF(){
 	TM_NRF24L01_SetTxAddress(TxAddress);
 }
 
-void RF_receive(NRF_ThoiTiet* NRF)
+void mRF_receiveRF(NRF_ThoiTiet* NRF)
 {
 			TM_NRF24L01_GetData(dataIn);
 			NRF->ApSuat = dataIn[0]<<24|dataIn[1]<<16|dataIn[2]<<8|(dataIn[3]);
 			NRF->NhietDo = dataIn[4];
 			NRF->DoAm = dataIn[5];
-			NRF->Mua = dataIn[6];
-	
+			NRF->Mua = dataIn[6];			
+//			if(NRF->ApSuat!=0 && NRF->NhietDo!=0 && NRF->DoAm!=0 && NRF->Mua!=0)
+//			{
+//				count24=count24+1;
+//				count_Fuzzy=1;				
+//			}
+//			else 
+//			{
+//				mLCD_LcdMode=3;
+//				TM_DISCO_LedOn(LED_ORANGE);
+//			}
 }
 
 void readRfData(NRF_ThoiTiet* NRF)

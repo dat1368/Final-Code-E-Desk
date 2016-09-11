@@ -2,7 +2,7 @@
 .\objects\nrf24l01.o: ..\Utilities\nrf24l01.h
 .\objects\nrf24l01.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\nrf24l01.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\objects\nrf24l01.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\nrf24l01.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\nrf24l01.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\objects\nrf24l01.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\objects\nrf24l01.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
@@ -42,6 +42,7 @@
 .\objects\nrf24l01.o: ..\TM\tm_stm32f4_gpio.h
 .\objects\nrf24l01.o: ..\TM\tm_stm32f4_delay.h
 .\objects\nrf24l01.o: ..\TM\tm_stm32f4_timer_properties.h
-.\objects\nrf24l01.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\nrf24l01.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\nrf24l01.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\nrf24l01.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\nrf24l01.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\nrf24l01.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\nrf24l01.o: ..\TM\tm_stm32f4_disco.h

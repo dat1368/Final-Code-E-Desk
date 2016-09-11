@@ -1,10 +1,10 @@
 .\objects\timers.o: ..\FreeRTOS\Source\timers.c
-.\objects\timers.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\timers.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\timers.o: ..\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\timers.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\timers.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\timers.o: ..\FreeRTOS\Source\include\projdefs.h
 .\objects\timers.o: ..\FreeRTOS\FreeRTOSConfig.h
-.\objects\timers.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\timers.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\timers.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\timers.o: ..\Libraries\CMSIS\Include\core_cm4.h
 .\objects\timers.o: ..\Libraries\CMSIS\Include\core_cmInstr.h

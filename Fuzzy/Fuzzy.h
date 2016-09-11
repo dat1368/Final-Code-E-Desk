@@ -48,6 +48,7 @@ Center-of-gravity is used for defuzzification.
 
 //using namespace std;
 /************************************************************************************/
+
 enum OUTPUT_
 {
 	RT,

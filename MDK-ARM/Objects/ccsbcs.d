@@ -3,7 +3,7 @@
 .\objects\ccsbcs.o: ..\FATFS\option\../integer.h
 .\objects\ccsbcs.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\ccsbcs.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\objects\ccsbcs.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ccsbcs.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\ccsbcs.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\objects\ccsbcs.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\objects\ccsbcs.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
@@ -36,5 +36,5 @@
 .\objects\ccsbcs.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h
 .\objects\ccsbcs.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h
 .\objects\ccsbcs.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
-.\objects\ccsbcs.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\ccsbcs.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\ccsbcs.o: ..\FATFS\option\../ffconf.h

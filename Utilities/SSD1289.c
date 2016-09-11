@@ -867,11 +867,21 @@ void LCD_WriteBMP(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width, u
 void LCD_Clear_P(uint16_t Color,uint16_t Xstart,uint16_t Ystart ,uint16_t point)
 {
   uint32_t index = 0;
+	uint32_t i = Ystart;
   LCD_SetCursor(Xstart,Ystart);
   LCD_WriteGRAM();
   for(index = 0; index <point; index++)					// 76800=320*240
   {
-    LCD_RAM = Color;   
-  }  
+  if (Ystart==0)
+	{
+			Xstart++;
+			Ystart= i;
+	}		
+	LCD_SetCursor(Xstart,Ystart);
+	LCD_WriteGRAM();
+	LCD_WriteRAM(Color);
+	Ystart--;		
+  } 
 }
+
 

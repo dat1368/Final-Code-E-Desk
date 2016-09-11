@@ -2,7 +2,7 @@
 .\objects\main.o: ..\User\main.h
 .\objects\main.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\main.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\objects\main.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\objects\main.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\objects\main.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
@@ -36,17 +36,17 @@
 .\objects\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h
 .\objects\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
 .\objects\main.o: ..\FATFS\integer.h
-.\objects\main.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\main.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\main.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\main.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: ..\TM\tm_stm32f4_disco.h
 .\objects\main.o: ..\TM\defines.h
 .\objects\main.o: ..\TM\tm_stm32f4_gpio.h
 .\objects\main.o: ..\TM\tm_stm32f4_usart.h
 .\objects\main.o: ..\TM\attributes.h
 .\objects\main.o: ..\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\main.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\main.o: ..\FreeRTOS\Source\include\projdefs.h
 .\objects\main.o: ..\FreeRTOS\FreeRTOSConfig.h
 .\objects\main.o: ..\FreeRTOS\Source\include\portable.h
@@ -58,16 +58,16 @@
 .\objects\main.o: ..\FreeRTOS\Source\include\croutine.h
 .\objects\main.o: ..\TM\tm_stm32f4_ds1307.h
 .\objects\main.o: ..\TM\tm_stm32f4_i2c.h
-.\objects\main.o: ..\ESP8266\esp8266.h
-.\objects\main.o: ..\FATFS\diskio.h
-.\objects\main.o: ..\FATFS\ff.h
-.\objects\main.o: ..\FATFS\ffconf.h
+.\objects\main.o: ..\Utilities\SSD1289.h
+.\objects\main.o: ..\Utilities\AsciiLib.h
+.\objects\main.o: ..\TM\tm_stm32f4_delay.h
+.\objects\main.o: ..\TM\tm_stm32f4_timer_properties.h
+.\objects\main.o: ..\User\TFT.h
+.\objects\main.o: ..\Fuzzy\Fuzzy.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\main.o: ..\Utilities\nrf24l01.h
 .\objects\main.o: ..\TM\tm_stm32f4_nrf24l01.h
 .\objects\main.o: ..\TM\tm_stm32f4_spi.h
-.\objects\main.o: ..\TM\tm_stm32f4_delay.h
-.\objects\main.o: ..\TM\tm_stm32f4_timer_properties.h
-.\objects\main.o: ..\Utilities\SSD1289.h
-.\objects\main.o: ..\Utilities\AsciiLib.h
-.\objects\main.o: ..\Fuzzy\Fuzzy.h
-.\objects\main.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\main.o: ..\Utilities\I2C1.h
+.\objects\main.o: ..\Utilities\BH1750.h
+.\objects\main.o: ..\Utilities\DHT11.h

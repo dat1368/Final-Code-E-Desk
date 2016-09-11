@@ -30,4 +30,5 @@ int calculateTime(Forecast *forecast)
   int temp =0;
   temp = (200-(forecast->decreasePres))/200;
   forecast->timeForecast = temp;
+	return 1;
 }

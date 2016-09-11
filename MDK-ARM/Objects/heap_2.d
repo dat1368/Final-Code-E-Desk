@@ -1,10 +1,10 @@
 .\objects\heap_2.o: ..\FreeRTOS\Source\portable\MemMang\heap_2.c
-.\objects\heap_2.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\heap_2.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\heap_2.o: ..\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\heap_2.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\heap_2.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\heap_2.o: ..\FreeRTOS\Source\include\projdefs.h
 .\objects\heap_2.o: ..\FreeRTOS\FreeRTOSConfig.h
-.\objects\heap_2.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\heap_2.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\heap_2.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\heap_2.o: ..\Libraries\CMSIS\Include\core_cm4.h
 .\objects\heap_2.o: ..\Libraries\CMSIS\Include\core_cmInstr.h

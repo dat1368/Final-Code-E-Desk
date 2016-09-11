@@ -1,12 +1,12 @@
 .\objects\fuzzy.o: ..\Fuzzy\Fuzzy.c
 .\objects\fuzzy.o: ..\Fuzzy\Fuzzy.h
-.\objects\fuzzy.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-.\objects\fuzzy.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\fuzzy.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\fuzzy.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\fuzzy.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\fuzzy.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\fuzzy.o: ..\Utilities\nrf24l01.h
 .\objects\fuzzy.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\fuzzy.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\objects\fuzzy.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\fuzzy.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\fuzzy.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\objects\fuzzy.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\objects\fuzzy.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
@@ -46,4 +46,4 @@
 .\objects\fuzzy.o: ..\TM\tm_stm32f4_gpio.h
 .\objects\fuzzy.o: ..\TM\tm_stm32f4_delay.h
 .\objects\fuzzy.o: ..\TM\tm_stm32f4_timer_properties.h
-.\objects\fuzzy.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\fuzzy.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

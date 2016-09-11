@@ -1,11 +1,11 @@
 .\objects\queue.o: ..\FreeRTOS\Source\queue.c
-.\objects\queue.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\queue.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\queue.o: ..\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\queue.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\queue.o: ..\FreeRTOS\Source\include\projdefs.h
 .\objects\queue.o: ..\FreeRTOS\FreeRTOSConfig.h
-.\objects\queue.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\queue.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\queue.o: ..\Libraries\CMSIS\Include\core_cm4.h
 .\objects\queue.o: ..\Libraries\CMSIS\Include\core_cmInstr.h

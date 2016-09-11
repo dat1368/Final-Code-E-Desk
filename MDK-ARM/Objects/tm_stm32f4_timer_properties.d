@@ -2,7 +2,7 @@
 .\objects\tm_stm32f4_timer_properties.o: ..\TM\tm_stm32f4_timer_properties.h
 .\objects\tm_stm32f4_timer_properties.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\tm_stm32f4_timer_properties.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\objects\tm_stm32f4_timer_properties.o: C:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\tm_stm32f4_timer_properties.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\tm_stm32f4_timer_properties.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\objects\tm_stm32f4_timer_properties.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\objects\tm_stm32f4_timer_properties.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

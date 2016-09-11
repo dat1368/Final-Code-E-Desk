@@ -47,76 +47,64 @@
 #include "croutine.h"
 /*----------  RTC  ----------*/
 #include "tm_stm32f4_ds1307.h"
-/*----------  RF  ----------*/
-#include "esp8266.h"
 /*----------  LCD  ----------*/
 #include "SSD1289.h"
-/*----------  Fuzzy  ----------*/
-#include "Fuzzy.h"
+/*----------  TFT  ----------*/
+#include "TFT.h"
+/*----------  BH1750  ----------*/
+#include "I2C1.h"
+#include "BH1750.h"
+/*----------  DHT11  ----------*/
+#include "DHT11.h"
 /*=====  End of Include module  ======*/
 
 TM_DS1307_Time_t time;
 NRF_ThoiTiet NRF;
 uint8_t Time_Start = 0;
 int Time_Write = 0;
-uint8_t count24;
+uint8_t count24=0;
 int temp;
-char sbuff[300];
+char* date[8] = {"","Monday", "Tuesday",  "Wednesday","Thursday", "Friday", "Saturday", "Sunday"};
+char* Month[13] = {"","January","February","March","April","May","June","July","August", "September", "October", "November", "December"};
+char* Mua[3] = {"Heavy","Rain","Sunny"};
+char s01[300];
+char s02[300];
+char s03[300];
+char s04[300];
+char s05[300];
+char s06[300];
+char s07[300];
+char s08[300];
+char* chuoi[8]={s01,s02,s03,s04,s05,s06,s07,s08};
+int change=1;
+int dem =-1;
+uint8_t mLCD_LcdMode = 0;
 
-char* date[] = {"",         "Monday", "Tuesday",  "Wednesday",
-                "Thursday", "Friday", "Saturday", "Sunday"};
-char* Month[] = {"",        "January",  "February", "March",  "April",
-                 "May",     "June",     "July",     "August", "September",
-                 "October", "November", "December"};
-char* Mua[] = {"Heavy", "Rain", "Sunny"};
-typedef struct struct_MyDateTime
+struct Environment
 {
-	int day;
-	int month;
-	int year;
+	uint8_t NhietDo;
+	uint8_t AnhSang;
+	uint8_t DoAmKhi;
+};
 
-	int hour;
-	int minute;
+typedef struct Environment Env;
 
-}MyDateTime;
-
-typedef struct 
-{
-    uint8_t Temp; 
-    uint8_t Humi; 
-    long Pres;   
-    uint8_t Rain;    
-} WeatherRoot;
-
-typedef struct
-{
-    MyDateTime currentDateTime;
-    WeatherRoot currentWeather[5];
-    float presDown;
-    float rateInYear;
-    float rateInDay;
-    float output;
-    double totalDecrease;
-    char* strWeather;
-    char* strForWeather;
-    float ratio;
-}WeatherForecast;
-
-int timeDelay_lwf = 0;
-FUZ_SYS_LWF fuzzy_system_lwf;
 int readRf(void);
 int showTime(void);
-int resetLcd(void);
+
+int mLCD_resetLcd(void);
+int mLCD_showTitle(void);
+
 int sendThSp(void);
 /*declarece*/
 int initMain(int flag);
 int initTask(void);
-int showDefaultLCD(void);
+char sbuff[300];
 int ResetWeather(WeatherForecast weatherForecast);
 float pushPresDownArray(float pushValue);
-int LCD_showDateTime(void);
+uint8_t LCD_showDateTime(uint8_t mode);
 int LCD_showUpdate(int mode);
-//double round(double soCanLamTron, int chuSo);
+int mLCD_storeChuoi(void);
 
 #endif /* __MAIN_H */
 

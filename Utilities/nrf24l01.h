@@ -9,7 +9,6 @@
 
 #ifndef NRF024L01_
 #define NRF024L01_
-
 #include "stm32f4xx.h"
 /* Include my libraries here */
 #include "defines.h"
@@ -18,8 +17,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-
+//extern uint8_t count24;
+//extern int count_Fuzzy;
+//extern uint8_t mLCD_LcdMode;
 typedef struct 
 {
     uint8_t NhietDo; 
@@ -28,8 +28,8 @@ typedef struct
     uint8_t Mua;    
 } NRF_ThoiTiet;
 
-void setRF(void);
+void mRF_initRf(void);
 
-void RF_receive(NRF_ThoiTiet* NRF);
+void mRF_receiveRF(NRF_ThoiTiet* NRF);
 int getApsuat(long pressure[],NRF_ThoiTiet NRF,int i,float deregre[],float percentPr[]);
 #endif

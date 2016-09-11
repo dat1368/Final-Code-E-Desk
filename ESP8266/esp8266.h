@@ -9,7 +9,12 @@
 #include "tm_stm32f4_disco.h"
 #include "nrf24l01.h"
 #include "tm_stm32f4_usart.h"
-
+//#include "TFT.h"
+/*----------  FreeRTOS  ----------*/
+#include "FreeRTOS.h"
+#include "queue.h"
+#include "task.h"
+#include "croutine.h"
 /* Private function prototypes -----------------------------------------------*/
 #ifdef __GNUC__
   /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
@@ -27,11 +32,10 @@
 #define SIDD			"HQD"
 #define PASS			"emkhongbiet"
 #define APIKEY		"ZFWTJEXVLTYQKI6J&"
-
 int sendEsp(char* ip, uint32_t port,char* apiKey,char* fieldx,uint8_t data);
 int setEsp(USART_TypeDef* USARTx, TM_USART_PinsPack_t pinspack, uint32_t baudrate);
 int senddata(NRF_ThoiTiet NRF);
 int connectWifi(char*sidd ,char* passWifi);
 int connect(void);
-
 int sendEspPre(char* ip, uint32_t port,char apiKey[],char fieldx[],long data);
+//extern char* buffer_Esp;
