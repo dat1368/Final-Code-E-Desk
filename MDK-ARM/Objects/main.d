@@ -71,3 +71,4 @@
 .\objects\main.o: ..\Utilities\I2C1.h
 .\objects\main.o: ..\Utilities\BH1750.h
 .\objects\main.o: ..\Utilities\DHT11.h
+.\objects\main.o: ..\TM\tm_stm32f4_adc.h

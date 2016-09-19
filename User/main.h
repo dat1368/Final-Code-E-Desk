@@ -56,6 +56,8 @@
 #include "BH1750.h"
 /*----------  DHT11  ----------*/
 #include "DHT11.h"
+/*----------  ADC  ----------*/
+#include "tm_stm32f4_adc.h"
 /*=====  End of Include module  ======*/
 
 TM_DS1307_Time_t time;
@@ -86,8 +88,14 @@ struct Environment
 	uint32_t AnhSang;
 	uint8_t DoAmKhi;
 };
-
 typedef struct Environment Env;
+
+struct UserData_Struct
+{
+    float distance;
+    uint16_t time;
+};
+typedef struct UserData_Struct USERDATA_TYPE;
 
 int readRf(void);
 int showTime(void);

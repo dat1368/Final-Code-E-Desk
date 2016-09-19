@@ -699,6 +699,11 @@
               <FileType>1</FileType>
               <FilePath>..\TM\tm_stm32f4_timer_properties.c</FilePath>
             </File>
+            <File>
+              <FileName>tm_stm32f4_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\TM\tm_stm32f4_adc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

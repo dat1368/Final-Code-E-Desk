@@ -32,7 +32,10 @@ int mLCD_showTitle(void);
 int mLCD_showDateTime(void);
 int mLCD_showSensor(void);
 
+float getDistance(uint16_t voltaValue);
+
 Env InRoomEvn;
+USERDATA_TYPE userData;
 
 int main() 
 {
@@ -57,9 +60,11 @@ int initMain(int flag)
         LCD_Init();
 
         I2C1_Init();
-        BH1750_Init();
+        //BH1750_Init();
 
         DHT_GetTemHumi();
+        
+        TM_ADC_Init(ADC1,ADC_Channel_0);
 
         mLCD_resetLcd();
         LCD_Clear(BLACK);
@@ -115,10 +120,12 @@ static void vDA2_ReadSensor(void *pvParameters)
     {
         vTaskDelay( 300 / portTICK_RATE_MS );
         TM_DISCO_LedToggle(LED_ORANGE);
-        InRoomEvn.AnhSang = BH1750_Read();
+        //InRoomEvn.AnhSang = BH1750_Read();
         InRoomEvn.DoAmKhi = DHT_doam();
         InRoomEvn.NhietDo = DHT_nhietdo();
-
+        
+        userData.distance = getDistance(TM_ADC_Read(ADC1,ADC_Channel_0));
+        
         TM_DS1307_GetDateTime(&time);
     }
 }
@@ -140,6 +147,10 @@ int mLCD_showSensor()
     //LCD_Clear_P(WHITE, 110, 240, 5120);
     sprintf(sbuff, "%d*C , %02d lux , %02d humi   ",InRoomEvn.NhietDo,InRoomEvn.AnhSang,InRoomEvn.DoAmKhi);
     LCD_StringLine(110, 250, (uint8_t *)sbuff);
+    
+    sprintf(sbuff, "Distance : %0.2f",userData.distance);
+    
+    LCD_StringLine(150, 250, (uint8_t *)sbuff);
     return 1;
 }
 
@@ -197,6 +208,13 @@ int mLCD_showTitle()
     return 1;
 }
 
+float getDistance(uint16_t voltaValue)
+{
+    float volts = voltaValue*0.0048828125;
+    // value from sensor * (5/1024) - if running 3.3.volts then change 5 to 3.3
+    float distance = 65*pow(volts, -1.10);
+    return distance;
+}
 
 #ifdef USE_FULL_ASSERT
 /**
