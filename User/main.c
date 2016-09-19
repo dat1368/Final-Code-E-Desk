@@ -60,16 +60,22 @@ int initMain(int flag)
         LCD_Init();
 
         I2C1_Init();
-        //BH1750_Init();
+        /*I2C1_PINS PACK 2
+        SCL=PB8_SDA=PB9  */
+        /*BH1750_Init();*/
 
         DHT_GetTemHumi();
         
+        /*Sensor khoang cach*/
+        /*ADC: Pin_A0 (ADC1 channel 0)*/
         TM_ADC_Init(ADC1,ADC_Channel_0);
 
         mLCD_resetLcd();
         LCD_Clear(BLACK);
         mLCD_showTitle();
         
+        /*I2C2_PINS PACK 1
+        SCL=PB10_SDA=PB11  */
         if (TM_DS1307_Init() != TM_DS1307_Result_Ok)
         {
             /*Warning that RTC error*/
