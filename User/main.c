@@ -31,11 +31,24 @@ int mLCD_resetLcd(void);
 int mLCD_showTitle(void);
 int mLCD_showDateTime(void);
 int mLCD_showSensor(void);
+char note[32]="12:45 12-7-16 an toi";
+
+typedef struct STRUCT_OF_NOTE
+{
+    TM_DS1307_Time_t noteTime;
+    char *note;
+}NOTE;
 
 float getDistance(uint16_t voltaValue);
+NOTE parsingLine(char* inputString);
 
 Env InRoomEvn;
 USERDATA_TYPE userData;
+
+
+
+NOTE userNotes[10];
+int noteIndex=0;
 
 int main() 
 {
@@ -62,7 +75,7 @@ int initMain(int flag)
         I2C1_Init();
         /*I2C1_PINS PACK 2
         SCL=PB8_SDA=PB9  */
-        /*BH1750_Init();*/
+        BH1750_Init();
 
         DHT_GetTemHumi();
         
@@ -73,6 +86,9 @@ int initMain(int flag)
         mLCD_resetLcd();
         LCD_Clear(BLACK);
         mLCD_showTitle();
+        
+        TM_USART_Init(USART6, TM_USART_PinsPack_1, 9600);
+        TM_USART_SetCustomStringEndCharacter(USART6,'.');
         
         /*I2C2_PINS PACK 1
         SCL=PB10_SDA=PB11  */
@@ -126,13 +142,23 @@ static void vDA2_ReadSensor(void *pvParameters)
     {
         vTaskDelay( 300 / portTICK_RATE_MS );
         TM_DISCO_LedToggle(LED_ORANGE);
-        //InRoomEvn.AnhSang = BH1750_Read();
+        DHT_GetTemHumi();
+        InRoomEvn.AnhSang = BH1750_Read();
         InRoomEvn.DoAmKhi = DHT_doam();
         InRoomEvn.NhietDo = DHT_nhietdo();
         
         userData.distance = getDistance(TM_ADC_Read(ADC1,ADC_Channel_0));
         
         TM_DS1307_GetDateTime(&time);
+        
+//        if(!TM_USART_BufferEmpty(USART6))
+//        {
+//            TM_USART_Gets(USART6,note,TM_USART6_BUFFER_SIZE);
+//            TM_USART_ClearBuffer(USART6);
+//            TM_DISCO_LedToggle(LED_GREEN);
+//        }
+        
+        userNotes[0] = parsingLine(note);
     }
 }
 
@@ -155,8 +181,10 @@ int mLCD_showSensor()
     LCD_StringLine(110, 250, (uint8_t *)sbuff);
     
     sprintf(sbuff, "Distance : %0.2f",userData.distance);
-    
     LCD_StringLine(150, 250, (uint8_t *)sbuff);
+    
+    sprintf(sbuff,"%d:%d %d-%d-%d %s",userNotes[0].noteTime.hours, userNotes[0].noteTime.minutes ,userNotes[0].noteTime.day, userNotes[0].noteTime.month, userNotes[0].noteTime.year, userNotes[0].note);
+    LCD_StringLine(180, 250, (uint8_t *)sbuff);
     return 1;
 }
 
@@ -221,6 +249,62 @@ float getDistance(uint16_t voltaValue)
     float distance = 65*pow(volts, -1.10);
     return distance;
 }
+
+NOTE parsingLine(char* inputString)
+{
+    NOTE tempNoteType;
+    char * pch;
+    char tempNote[3][32];
+    char tempTime1[2][2];
+    char tempTime2[3][4];
+    pch = strtok (inputString," ,.-");
+    if(pch!=NULL)
+    {
+        strcpy(tempNote[0],pch);
+        pch = strtok (inputString," ,.-");
+        strcpy(tempNote[1],pch);
+        pch = strtok (inputString,".");
+        strcpy(tempNote[2],pch);
+    }
+    /*Parsing Time hour in tempNote[0]*/
+    /*  tempTime1[0] = (string)hour;
+    *   tempTime1[1] = (string)minutes;
+    */
+    pch = strtok(tempNote[0],":-'");
+    if(pch!=NULL)
+    {
+        strcpy(tempTime1[0],pch);
+        pch = strtok(tempNote[0],":-'");
+        strcpy(tempTime1[1],pch);
+    }
+    tempNoteType.noteTime.hours = atoi(tempTime1[0]);
+    tempNoteType.noteTime.minutes = atoi(tempTime1[1]);
+    /*Parsing Day in tempNote[1]*/
+    /*  tempTime2[0] = (string)day;
+    *   tempTime2[1] = (string)month;
+    *   tempTime2[2] = (string)year;
+    */
+    pch = strtok(tempNote[1],":-'");
+    if(pch!=NULL)
+    {
+        strcpy(tempTime2[0],pch);
+        pch = strtok(tempNote[1],":-'");
+        strcpy(tempTime2[1],pch);
+        pch = strtok(tempNote[1],":-'");
+        strcpy(tempTime2[2],pch);
+    }
+    tempNoteType.noteTime.day = atoi(tempTime2[0]);
+    tempNoteType.noteTime.month = atoi(tempTime2[1]);
+    tempNoteType.noteTime.year = atoi(tempTime2[2]);
+    
+    /*Parsing text note in tempNote[2]*/
+    strcpy(tempNoteType.note,tempNote[2]);
+    
+    /*Return to NOTE*/
+    return tempNoteType;
+}
+
+
 
 #ifdef USE_FULL_ASSERT
 /**

@@ -39,7 +39,6 @@
 #include <stdlib.h>
 #include "tm_stm32f4_disco.h"
 #include "tm_stm32f4_usart.h"
-#include <string.h>
 /*----------  FreeRTOS  ----------*/
 #include "FreeRTOS.h"
 #include "queue.h"
@@ -59,6 +58,8 @@
 /*----------  ADC  ----------*/
 #include "tm_stm32f4_adc.h"
 /*=====  End of Include module  ======*/
+
+#define __cplusplus
 
 TM_DS1307_Time_t time;
 NRF_ThoiTiet NRF;
