@@ -58,11 +58,10 @@
 /*----------  ADC  ----------*/
 #include "tm_stm32f4_adc.h"
 /*=====  End of Include module  ======*/
-
+#include <math.h>
 #define __cplusplus
 
 TM_DS1307_Time_t time;
-NRF_ThoiTiet NRF;
 uint8_t Time_Start = 0;
 int Time_Write = 0;
 uint8_t count24=0;

@@ -12,6 +12,7 @@
  *greater required
  */
 #include "main.h"
+//#include <math.h>
 /*
 RTOS TASK
 
@@ -31,12 +32,12 @@ int mLCD_resetLcd(void);
 int mLCD_showTitle(void);
 int mLCD_showDateTime(void);
 int mLCD_showSensor(void);
-char note[32]="12:45 12-7-16 an toi";
+char note[100]={0};
 
 typedef struct STRUCT_OF_NOTE
 {
-    TM_DS1307_Time_t noteTime;
-    char *note;
+    TM_DS1307_Time_t noteTime ;
+    char note[50];
 }NOTE;
 
 float getDistance(uint16_t voltaValue);
@@ -98,7 +99,7 @@ int initMain(int flag)
             TM_DISCO_LedOn(LED_ALL);
         }
             
-        if(0)
+        if(1)
         {
             /* Set date and time */
             /* Day 7, 26th May 2014, 02:05:00 */
@@ -140,8 +141,9 @@ static void vDA2_ReadSensor(void *pvParameters)
 {
     for(;;)
     {
-        vTaskDelay( 300 / portTICK_RATE_MS );
-        TM_DISCO_LedToggle(LED_ORANGE);
+        vTaskDelay( 250 / portTICK_RATE_MS );
+        
+        int index =0;
         DHT_GetTemHumi();
         InRoomEvn.AnhSang = BH1750_Read();
         InRoomEvn.DoAmKhi = DHT_doam();
@@ -150,15 +152,28 @@ static void vDA2_ReadSensor(void *pvParameters)
         userData.distance = getDistance(TM_ADC_Read(ADC1,ADC_Channel_0));
         
         TM_DS1307_GetDateTime(&time);
+        TM_DISCO_LedToggle(LED_ORANGE);
         
-//        if(!TM_USART_BufferEmpty(USART6))
-//        {
-//            TM_USART_Gets(USART6,note,TM_USART6_BUFFER_SIZE);
-//            TM_USART_ClearBuffer(USART6);
-//            TM_DISCO_LedToggle(LED_GREEN);
-//        }
+        if(!TM_USART_BufferEmpty(USART6))
+        {
+            TM_USART_Gets(USART6,note,TM_USART6_BUFFER_SIZE);
+            TM_USART_ClearBuffer(USART6);
+            TM_DISCO_LedToggle(LED_GREEN);
+//            char tempInParse[50];
+//            strcpy(tempInParse,note);
+//            for(int i=0;i<50;i++)
+//            {
+//                tempInParse[i] = note[i];
+//            }
+            sprintf(sbuff, "Note:%s",note);
+            LCD_StringLine(180, 300, (uint8_t *)sbuff);
+            userNotes[index] = parsingLine(note);
+            index++;
+            if(index>10)
+                index=0;
+        }
         
-        userNotes[0] = parsingLine(note);
+
     }
 }
 
@@ -166,7 +181,7 @@ static void vDA2_ShowLCD(void *pvParameters)
 {
     for(;;)
     {
-        vTaskDelay( 300 / portTICK_RATE_MS );
+        //vTaskDelay( 300 / portTICK_RATE_MS );
         mLCD_showSensor();
         mLCD_showDateTime();
     }
@@ -183,8 +198,9 @@ int mLCD_showSensor()
     sprintf(sbuff, "Distance : %0.2f",userData.distance);
     LCD_StringLine(150, 250, (uint8_t *)sbuff);
     
-    sprintf(sbuff,"%d:%d %d-%d-%d %s",userNotes[0].noteTime.hours, userNotes[0].noteTime.minutes ,userNotes[0].noteTime.day, userNotes[0].noteTime.month, userNotes[0].noteTime.year, userNotes[0].note);
-    LCD_StringLine(180, 250, (uint8_t *)sbuff);
+    //sprintf(sbuff, "Note:%s",note);
+    //sprintf(sbuff,"%d:%d %d-%d-%d %s",userNotes[0].noteTime.hours, userNotes[0].noteTime.minutes ,userNotes[0].noteTime.day, userNotes[0].noteTime.month, userNotes[0].noteTime.year, userNotes[0].note);
+    //LCD_StringLine(180, 250, (uint8_t *)sbuff);
     return 1;
 }
 
@@ -250,60 +266,89 @@ float getDistance(uint16_t voltaValue)
     return distance;
 }
 
+//NOTE parsingLine(char* inputString)
+//{
+//    NOTE tempNoteType;
+//    char * pch;
+//    char tempNote[3][32] = {0};
+//    char tempTime1[2][2] = {0};
+//    char tempTime2[3][4] = {0};
+//    pch = strtok (inputString," ");
+//    if(pch!=NULL)
+//    {
+//        strcpy(tempNote[0],pch);
+//        pch = strtok (NULL," ");
+//        strcpy(tempNote[1],pch);
+//        pch = strtok (NULL,".");
+//        strcpy(tempNote[2],pch);
+//    }
+//    /*Parsing Time hour in tempNote[0]*/
+//    /*  tempTime1[0] = (string)hour;
+//    *   tempTime1[1] = (string)minutes;
+//    */
+//    pch = strtok(tempNote[0],":-'");
+//    if(pch!=NULL)
+//    {
+//        strcpy(tempTime1[0],pch);
+//        pch = strtok(NULL,":-'");
+//        strcpy(tempTime1[1],pch);
+//    }
+//    tempNoteType.noteTime.hours = atoi(tempTime1[0]);
+//    tempNoteType.noteTime.minutes = atoi(tempTime1[1]);
+//    /*Parsing Day in tempNote[1]*/
+//    /*  tempTime2[0] = (string)day;
+//    *   tempTime2[1] = (string)month;
+//    *   tempTime2[2] = (string)year;
+//    */
+//    pch = strtok(tempNote[1],":-'");
+//    if(pch!=NULL)
+//    {
+//        strcpy(tempTime2[0],pch);
+//        pch = strtok(NULL,":-'");
+//        strcpy(tempTime2[1],pch);
+//        pch = strtok(NULL,":-'");
+//        strcpy(tempTime2[2],pch);
+//    }
+//    tempNoteType.noteTime.day = atoi(tempTime2[0]);
+//    tempNoteType.noteTime.month = atoi(tempTime2[1]);
+//    tempNoteType.noteTime.year = atoi(tempTime2[2]);
+//    
+//    /*Parsing text note in tempNote[2]*/
+//    strcpy(tempNoteType.note,tempNote[2]);
+//    
+//    /*Return to NOTE*/
+//    pch =NULL;
+//    return tempNoteType;
+//}
+
 NOTE parsingLine(char* inputString)
 {
     NOTE tempNoteType;
-    char * pch;
-    char tempNote[3][32];
-    char tempTime1[2][2];
-    char tempTime2[3][4];
-    pch = strtok (inputString," ,.-");
+    char *pch;
+    pch = strtok (inputString,":");
     if(pch!=NULL)
     {
-        strcpy(tempNote[0],pch);
-        pch = strtok (inputString," ,.-");
-        strcpy(tempNote[1],pch);
-        pch = strtok (inputString,".");
-        strcpy(tempNote[2],pch);
+        tempNoteType.noteTime.hours = atoi(pch);
+        
+        pch = strtok (NULL," ");
+        tempNoteType.noteTime.minutes = atoi(pch);
+        
+        pch = strtok (NULL,"-");
+        tempNoteType.noteTime.day = atoi(pch);
+        
+        pch = strtok (NULL,"-");
+        tempNoteType.noteTime.month = atoi(pch);
+        
+        pch = strtok (NULL," ");
+        tempNoteType.noteTime.year = atoi(pch);
+        
+        pch = strtok (NULL,".");
+        strcpy(tempNoteType.note,pch);
+        
+        free(pch);
     }
-    /*Parsing Time hour in tempNote[0]*/
-    /*  tempTime1[0] = (string)hour;
-    *   tempTime1[1] = (string)minutes;
-    */
-    pch = strtok(tempNote[0],":-'");
-    if(pch!=NULL)
-    {
-        strcpy(tempTime1[0],pch);
-        pch = strtok(tempNote[0],":-'");
-        strcpy(tempTime1[1],pch);
-    }
-    tempNoteType.noteTime.hours = atoi(tempTime1[0]);
-    tempNoteType.noteTime.minutes = atoi(tempTime1[1]);
-    /*Parsing Day in tempNote[1]*/
-    /*  tempTime2[0] = (string)day;
-    *   tempTime2[1] = (string)month;
-    *   tempTime2[2] = (string)year;
-    */
-    pch = strtok(tempNote[1],":-'");
-    if(pch!=NULL)
-    {
-        strcpy(tempTime2[0],pch);
-        pch = strtok(tempNote[1],":-'");
-        strcpy(tempTime2[1],pch);
-        pch = strtok(tempNote[1],":-'");
-        strcpy(tempTime2[2],pch);
-    }
-    tempNoteType.noteTime.day = atoi(tempTime2[0]);
-    tempNoteType.noteTime.month = atoi(tempTime2[1]);
-    tempNoteType.noteTime.year = atoi(tempTime2[2]);
-    
-    /*Parsing text note in tempNote[2]*/
-    strcpy(tempNoteType.note,tempNote[2]);
-    
-    /*Return to NOTE*/
     return tempNoteType;
 }
-
 
 
 #ifdef USE_FULL_ASSERT

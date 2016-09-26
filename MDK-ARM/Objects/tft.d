@@ -62,8 +62,3 @@
 .\objects\tft.o: ..\Utilities\AsciiLib.h
 .\objects\tft.o: ..\TM\tm_stm32f4_delay.h
 .\objects\tft.o: ..\TM\tm_stm32f4_timer_properties.h
-.\objects\tft.o: ..\Fuzzy\Fuzzy.h
-.\objects\tft.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-.\objects\tft.o: ..\Utilities\nrf24l01.h
-.\objects\tft.o: ..\TM\tm_stm32f4_nrf24l01.h
-.\objects\tft.o: ..\TM\tm_stm32f4_spi.h

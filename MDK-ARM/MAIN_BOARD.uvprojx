@@ -717,16 +717,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Fuzzy</GroupName>
-          <Files>
-            <File>
-              <FileName>Fuzzy.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Fuzzy\Fuzzy.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>FreeRTOS</GroupName>
           <Files>
             <File>

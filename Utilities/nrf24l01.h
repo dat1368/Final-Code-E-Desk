@@ -18,7 +18,6 @@
 #include <string.h>
 #include <stdlib.h>
 //extern uint8_t count24;
-//extern int count_Fuzzy;
 //extern uint8_t mLCD_LcdMode;
 typedef struct 
 {

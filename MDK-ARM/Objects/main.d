@@ -63,12 +63,8 @@
 .\objects\main.o: ..\TM\tm_stm32f4_delay.h
 .\objects\main.o: ..\TM\tm_stm32f4_timer_properties.h
 .\objects\main.o: ..\User\TFT.h
-.\objects\main.o: ..\Fuzzy\Fuzzy.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-.\objects\main.o: ..\Utilities\nrf24l01.h
-.\objects\main.o: ..\TM\tm_stm32f4_nrf24l01.h
-.\objects\main.o: ..\TM\tm_stm32f4_spi.h
 .\objects\main.o: ..\Utilities\I2C1.h
 .\objects\main.o: ..\Utilities\BH1750.h
 .\objects\main.o: ..\Utilities\DHT11.h
 .\objects\main.o: ..\TM\tm_stm32f4_adc.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
